@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Patch, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Patch, Delete, UseGuards, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { AuthAuthorizeGuard } from '../auth/auth-authorize.guard';
@@ -26,10 +26,15 @@ export class UserController {
     @UseGuards(AuthAuthorizeGuard, AuthAuthorizationRolesGuard)
     @AuthRoles('admin')
     @Get()
-    @ApiOperation({ summary: 'List all users' })
-    async getAllUsers() {
-        const users = this.userService.findAll();
-        return instanceToPlain(users);
+    @ApiOperation({ summary: 'List all users with pagination, filtering by username and role' })
+    async getAllUsers(
+        @Query('username') username?: string,
+        @Query('role') role?: string,
+        @Query('page') page: number = 1,
+        @Query('pageSize') pageSize: number = 10,
+    ) {
+        const paginatedUsers = await this.userService.findAllPaginated({ username, role, page, pageSize });
+        return instanceToPlain(paginatedUsers);
     }
 
     @UseGuards(AuthAuthorizeGuard, AuthAuthorizationRolesGuard)

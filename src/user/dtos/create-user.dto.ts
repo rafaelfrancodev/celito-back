@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsIn } from 'class-validator';  // Importing validation decorators
+import { IsString, IsNotEmpty, IsIn } from 'class-validator';
+import AuthRolesConstants from "../../auth/auth-roles.constants";  // Importing validation decorators
 
 export class CreateUserDto {
     @ApiProperty({ example: 'john_doe', description: 'The username of the user' })
@@ -12,8 +13,8 @@ export class CreateUserDto {
     @IsNotEmpty()
     password: string;
 
-    @ApiProperty({ example: 'admin', description: 'The role of the user (e.g., admin or user)' })
+    @ApiProperty({ example: 'admin', description: `The role of the user (e.g., ${AuthRolesConstants.ADMIN} or ${AuthRolesConstants.USER})` })
     @IsString()
-    @IsIn(['admin', 'user'])
+    @IsIn([AuthRolesConstants.ADMIN, AuthRolesConstants.USER])
     role: string;
 }
