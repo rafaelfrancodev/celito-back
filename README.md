@@ -62,6 +62,24 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+
+## Project Runner
+
+```bash
+#The project is running on port 3000
+http://localhost:3000
+
+#You can access the swagger at the following link
+http://localhost:3000/api/docs
+```
+
+## Postman Collection
+
+```bash
+#You can access the postman collection and environments in the following directory
+developers\postman
+```
+
 ## Run tests
 
 ```bash
