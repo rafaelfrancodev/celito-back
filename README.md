@@ -28,8 +28,19 @@
 
 ## Project setup
 
+
 ```bash
 $ npm install
+```
+## Create Migrations
+```bash
+npm run typeorm migration:create src/migrations/CreateUserTable
+```
+
+
+## Run Migrations
+```bash
+npm run migration:run
 ```
 
 ## Compile and run the project
