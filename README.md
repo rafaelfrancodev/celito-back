@@ -31,12 +31,18 @@
 
 ```bash
 $ npm install
+cd developers\postgres
+docker-compose up -d
 ```
-## Create Migrations
+## Create .env file
+```bash
+Rename .env.example to .env
+```
+
+## Create Migrations Examples if Necessary
 ```bash
 npm run typeorm migration:create src/migrations/CreateUserTable
 ```
-
 
 ## Run Migrations
 ```bash
